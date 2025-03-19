@@ -1,0 +1,175 @@
+<!-- array("Abroad", "Casual", "Around", "Couple", "Accept", "Caught", "Arrive", "Course", "Access", "Center", "Artist", "Covers", "Across", "Centre", "Aspect", "Create", "Acting", "Chance", "Assess", "Credit", "Action", "Change", "Assist", "Crisis", "Active", "Charge", "Assume", "Custom", "Actual", "Choice", "Attack", "Damage", "Advice", "Choose", "Attend", "Danger", "Advise", "Chosen", "August", "Dealer", "Affect", "Church", "Author", "Debate", "Afford", "Circle", "Avenue", "Decade", "Afraid", "Client", "Backed", "Decide", "Agency", "Closed", "Barely", "Defeat", "Agenda", "Closer", "Battle", "Defend", "Almost", "Coffee", "Beauty", "Define", "Always", "Column", "Became", "Degree", "Amount", "Combat", "Become", "Demand", "Animal", "Coming", "Before", "Depend", "Annual", "Common", "Behalf", "Deputy", "Answer", "Comply", "Behind", "Desert", "Anyone", "Copper", "Belief", "Design", "Anyway", "Corner", "Belong", "Desire", "Appeal", "Costly", "Bestie", "Detail", "Appear", "County", "Better", "Detect", "Beyond", "Budget", "During", "Device", "Bishop", "Burden", "Easily", "Differ", "Border", "Bureau", "Eating", "Dinner", "Bottle", "Button", "Editor", "Direct", "Bottom", "Camera", "Effect", "Doctor", "Bought", "Cancer", "Effort", "Dollar", "Branch", "Cannot", "Eighth", "Domain", "Breath", "Carbon", "Either", "Double", "Bridge", "Career", "Eleven", "Driven", "Bright", "Castle", "Emerge", "Driver") -->
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hangman Game</title>
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        div{
+            width: 600px;
+        }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; vertical-align: middle;">
+        <p id="words_turn1">Guess First Word :-</p>
+        <input type="text" name="guessed_word" id="guessed_word">
+    </div>
+    <div style="display: flex; gap: 5px;">
+        Lives Remaining :-<p id="lives_remaining1">5</p>
+    </div>
+    <div style="position: relative; left: 325px;">
+        <div>
+            <p style="margin: 0px; padding: 0px;">+-----------------------+</p>
+        </div>
+        <div style="position: relative; left: 166.5px; top: -5px;">
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+        </div>
+        <div style="position: relative; left: 8.5px; top: -385px; height: 0px;">
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+            <p style="margin: -5px; padding: 0px;">|</p>
+        </div>
+        <div style="position: absolute; top: -22px; left: -38px;">
+            <p id="face" style="position: absolute; font-size: 150px; display: none;">o</p>
+            <p id="body" style="position: absolute; font-size: 120px; left: 30px; top: 125px; display: none;">|</p>
+            <p id="left_hand" style="position: absolute; font-size: 120px; left: 3px; top: 140px; transform: rotate(40deg); display: none;">|</p>
+            <p id="right_hand" style="position: absolute; font-size: 120px; left: 57px; top: 140px; transform: rotate(-40deg); display: none;">|</p>
+            <p id="left_leg" style="position: absolute; font-size: 120px; left: 3px; top: 230px; transform: rotate(40deg); display: none;">|</p>
+            <p id="right_leg" style="position: absolute; font-size: 120px; left: 57px; top: 230px; transform: rotate(-40deg); display: none;">|</p>
+        </div>
+        <div style="position: relative; top: -10px; left: -100px;">
+            <p>============================</p>
+        </div>
+    </div>
+    <div>
+        <p id="q_p1" style="font-size: 50px; margin-top: -100px;"></p>
+        <p id="a_p1" style="font-size: 50px;"></p>
+    </div>
+
+    <div style="position: absolute; top: 50%;"><h1 id="result1"></h1></div>
+
+    <script>
+        
+        var all_words_array = ["Abroad", "Casual", "Around", "Couple", "Accept", "Caught", "Arrive", "Course", "Access", "Center", "Artist", "Covers", "Across", "Centre", "Aspect", "Create", "Acting", "Chance", "Assess", "Credit", "Action", "Change", "Assist", "Crisis", "Active", "Charge", "Assume", "Custom", "Actual", "Choice", "Attack", "Damage", "Advice", "Choose", "Attend", "Danger", "Advise", "Chosen", "August", "Dealer", "Affect", "Church", "Author", "Debate", "Afford", "Circle", "Avenue", "Decade", "Afraid", "Client", "Backed", "Decide", "Agency", "Closed", "Barely", "Defeat", "Agenda", "Closer", "Battle", "Defend", "Almost", "Coffee", "Beauty", "Define", "Always", "Column", "Became", "Degree", "Amount", "Combat", "Become", "Demand", "Animal", "Coming", "Before", "Depend", "Annual", "Common", "Behalf", "Deputy", "Answer", "Comply", "Behind", "Desert", "Anyone", "Copper", "Belief", "Design", "Anyway", "Corner", "Belong", "Desire", "Appeal", "Costly", "Bestie", "Detail", "Appear", "County", "Better", "Detect", "Beyond", "Budget", "During", "Device", "Bishop", "Burden", "Easily", "Differ", "Border", "Bureau", "Eating", "Dinner", "Bottle", "Button", "Editor", "Direct", "Bottom", "Camera", "Effect", "Doctor", "Bought", "Cancer", "Effort", "Dollar", "Branch", "Cannot", "Eighth", "Domain", "Breath", "Carbon", "Either", "Double", "Bridge", "Career", "Eleven", "Driven", "Bright", "Castle", "Emerge", "Driver"];
+        var one_word_array = [];
+        // document.write(all_words_array.length);
+        let x = Math.floor((Math.random() * 139) + 0);
+        one_word_array = all_words_array[x].split("");
+        // document.write(one_word_array);
+        document.getElementById("q_p1").innerHTML = one_word_array[0]+"<u>&nbsp;&nbsp;</u>"+one_word_array[2]+"<u>&nbsp;&nbsp;</u>"+one_word_array[4]+"<u>&nbsp;&nbsp;</u>"
+
+        document.getElementById("guessed_word").addEventListener("keyup", function () {
+            if(document.getElementById("words_turn1").innerHTML == "Guess First Word :-"){
+               if (this.value == one_word_array[1]) {
+                document.getElementById("q_p1").innerHTML = one_word_array[0]+"<u>"+one_word_array[1]+"</u>"+one_word_array[2]+"<u>&nbsp;&nbsp;</u>"+one_word_array[4]+"<u>&nbsp;&nbsp;</u>"
+                document.getElementById("words_turn1").innerHTML = "Guess Second Word :-";
+                this.value = "";
+               } else{
+                document.getElementById("lives_remaining1").innerHTML = parseInt(document.getElementById("lives_remaining1").innerHTML)-1;
+                this.value = "";
+               }
+            } else {
+                if(document.getElementById("words_turn1").innerHTML == "Guess Second Word :-"){
+                    if (this.value == one_word_array[3]) {
+                        document.getElementById("q_p1").innerHTML = one_word_array[0]+"<u>"+one_word_array[1]+"</u>"+one_word_array[2]+"<u>"+one_word_array[3]+"</u>"+one_word_array[4]+"<u>&nbsp;&nbsp;</u>"
+                        document.getElementById("words_turn1").innerHTML = "Guess Third Word :-";
+                        this.value = "";
+                    } else{
+                        document.getElementById("lives_remaining1").innerHTML = parseInt(document.getElementById("lives_remaining1").innerHTML)-1;
+                        this.value = "";
+                    }
+                } else {
+                    if(document.getElementById("words_turn1").innerHTML == "Guess Third Word :-"){
+                        if (this.value == one_word_array[5]) {
+                            document.getElementById("q_p1").innerHTML = one_word_array[0]+"<u>"+one_word_array[1]+"</u>"+one_word_array[2]+"<u>"+one_word_array[3]+"</u>"+one_word_array[4]+"<u>"+one_word_array[5]+"</u>"
+                            this.value = "";
+                                document.getElementById("result1").style.color = "green";
+                            document.getElementById("result1").innerHTML = "You Won";
+                        } else{
+                            document.getElementById("lives_remaining1").innerHTML = parseInt(document.getElementById("lives_remaining1").innerHTML)-1;
+                            this.value = "";
+                        }
+                    } else {
+                        
+                    }
+                }
+            }
+
+
+            if (document.getElementById("lives_remaining1").innerHTML == "4") {
+                document.getElementById("face").style.display = "block";
+                document.getElementById("body").style.display = "block";
+            } else {
+                if (document.getElementById("lives_remaining1").innerHTML == "3") {
+                    document.getElementById("face").style.display = "block";
+                    document.getElementById("body").style.display = "block";
+                    document.getElementById("left_hand").style.display = "block";
+                } else {
+                    if (document.getElementById("lives_remaining1").innerHTML == "2") {
+                        document.getElementById("face").style.display = "block";
+                        document.getElementById("body").style.display = "block";
+                        document.getElementById("left_hand").style.display = "block";
+                        document.getElementById("right_hand").style.display = "block";
+                    } else {
+                        if (document.getElementById("lives_remaining1").innerHTML == "1") {
+                            document.getElementById("face").style.display = "block";
+                            document.getElementById("body").style.display = "block";
+                            document.getElementById("left_hand").style.display = "block";
+                            document.getElementById("right_hand").style.display = "block";
+                            document.getElementById("left_leg").style.display = "block";
+                        } else {
+                            if (document.getElementById("lives_remaining1").innerHTML == "0") {
+                                document.getElementById("face").style.display = "block";
+                                document.getElementById("body").style.display = "block";
+                                document.getElementById("left_hand").style.display = "block";
+                                document.getElementById("right_hand").style.display = "block";
+                                document.getElementById("left_leg").style.display = "block";
+                                document.getElementById("right_leg").style.display = "block";
+
+                                document.getElementById("result1").style.color = "red";
+                                document.getElementById("result1").innerHTML = "You Lost";
+                                
+                                document.getElementById("a_p1").style.color = "blue";
+                                document.getElementById("a_p1").innerHTML = "The word was :- "+all_words_array[x];
+                            } else {
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
+        });
+
+    </script>
+  </body>
+</html>
